@@ -15,23 +15,23 @@ def parse_time(*args):
         times.append(eta)
     return times
 
-def alert(alertname,levels,times,instances,summary,description):
+def alert(alertname,levels,times,instances,summary,description,status):
     params = json.dumps({
-        "msgtype": "text",
-        "text":
+        "msgtype": "markdown",
+        "markdown":
             {
-                "content": "**********告警通知**********\告警名称: {0}\n告警级别: {1}\n故障时间: {2}\n告警实例: {3}\n告警主题：{4}\n告警详情：{5}".format(alertname,levels,times[0],instances,summary,description)
+                "content": "## <font color=\"info\">#告警通知： {6}</font> \n**告警名称：** <font color=\"warning\">{0}</font>\n**告警级别：** {1}\n**告警时间：** {2}\n**告警实例：** {3}\n**告警主题：** {4}\n**告警详情：**\n<font color=\"comment\"> {5}</font>".format(alertname,levels,times[0],instances,summary,description,status)
             }
         })
 
     return params
 
-def recive(altername,levels,times,instances,summary,description):
+def recive(alertname,levels,times,instances,summary,description,status):
     params = json.dumps({
-        "msgtype": "text",
+        "msgtype": "markdown",
         "text":
             {
-                "content": "**********恢复通知**********\n告警名称: {0}\n告警级别: {1}\n告警时间: {2}\n\n恢复时间: {3}\n告警实例: {4}\n告警主题：{5}\n告警详情：{6}".format(alertname,levels,times[0],times[1],instances,summary,description)
+                "content": "## <font color=\"info\">#告警通知： {6}</font> \n**告警类型：** <font color=\"warning\">{0}</font>\n**告警级别：** {1}\n**告警时间：** {2}\n**恢复时间：** {3}\n**告警实例：** {4}\n**告警主题：** {5}\n**告警详情：**\n  <font color=\"comment\">{6}</font>".format(alertname,levels,times[0],times[1],instances,summary,description,status)
             }
         })
 
@@ -39,13 +39,12 @@ def recive(altername,levels,times,instances,summary,description):
 
 def webhook_url(params):
     headers = {"Content-type": "application/json"}
-    url = "自己的机器人的webhook url"
+    url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4692f88d-8a3b-4221-a82a-913d266553d7"
     r = requests.post(url,params,headers)
 
 def send_alert(json_re):
-    print(json_re)
     for i in json_re['alerts']:
         if i['status'] == 'firing':
-            webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),i['labels']['instance'],i['annotations']['summary'],i['annotations']['description']))
+            webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),i['labels']['instance'],i['annotations']['summary'],i['annotations']['description'],i['status']))
         elif i['status'] == 'resolved':
-            webhook_url(recive(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),i['labels']['instance'],i['annotations']['summary'],i['annotations']['description']))
+            webhook_url(recive(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),i['labels']['instance'],i['annotations']['summary'],i['annotations']['description'],i['status']))
