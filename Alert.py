@@ -29,7 +29,7 @@ def alert(alertname,levels,times,instances,summary,description,status):
 def recive(alertname,levels,times,instances,summary,description,status):
     params = json.dumps({
         "msgtype": "markdown",
-        "text":
+        "markdown":
             {
                 "content": "## <font color=\"info\">#恢复通知： {7}</font> \n**告警类型：** <font color=\"warning\">{0}</font>\n**告警级别：** {1}\n**告警时间：** {2}\n**恢复时间：** {3}\n**告警实例：** {4}\n**告警主题：** {5}\n**告警详情：**\n  <font color=\"comment\">{6}</font>".format(alertname,levels,times[0],times[1],instances,summary,description,status)
             }
