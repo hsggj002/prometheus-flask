@@ -31,7 +31,7 @@ def recive(alertname,levels,times,instances,summary,description,status):
         "msgtype": "markdown",
         "text":
             {
-                "content": "## <font color=\"info\">#告警通知： {6}</font> \n**告警类型：** <font color=\"warning\">{0}</font>\n**告警级别：** {1}\n**告警时间：** {2}\n**恢复时间：** {3}\n**告警实例：** {4}\n**告警主题：** {5}\n**告警详情：**\n  <font color=\"comment\">{6}</font>".format(alertname,levels,times[0],times[1],instances,summary,description,status)
+                "content": "## <font color=\"info\">#恢复通知： {7}</font> \n**告警类型：** <font color=\"warning\">{0}</font>\n**告警级别：** {1}\n**告警时间：** {2}\n**恢复时间：** {3}\n**告警实例：** {4}\n**告警主题：** {5}\n**告警详情：**\n  <font color=\"comment\">{6}</font>".format(alertname,levels,times[0],times[1],instances,summary,description,status)
             }
         })
 
@@ -39,7 +39,7 @@ def recive(alertname,levels,times,instances,summary,description,status):
 
 def webhook_url(params):
     headers = {"Content-type": "application/json"}
-    url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4692f88d-8a3b-4221-a82a-913d266553d7"
+    url = "xxx"
     r = requests.post(url,params,headers)
 
 def send_alert(json_re):
