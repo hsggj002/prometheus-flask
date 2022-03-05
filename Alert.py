@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from doctest import debug_script
+from pydoc import describe
 import requests
 from flask import jsonify
 import json
@@ -13,23 +15,23 @@ def parse_time(*args):
         times.append(eta)
     return times
 
-def alert(types,levels,times,instances):
+def alert(alertname,levels,times,instances,summary,description,status):
     params = json.dumps({
-        "msgtype": "text",
-        "text":
+        "msgtype": "markdown",
+        "markdown":
             {
-                "content": "**********告警通知**********\n告警类型: {0}\n告警级别: {1}\n故障时间: {2}\n故障实例: {3}".format(types,levels,times[0],instances)
+                "content": "## <font color=\"info\">#告警通知： {6}</font> \n**告警名称：** <font color=\"warning\">{0}</font>\n**告警级别：** {1}\n**告警时间：** {2}\n**告警实例：** {3}\n**告警主题：** {4}\n**告警详情：**\n<font color=\"comment\"> {5}</font>".format(alertname,levels,times[0],instances,summary,description,status)
             }
         })
 
     return params
 
-def recive(types,levels,times,instances):
+def recive(alertname,levels,times,instances,summary,description,status):
     params = json.dumps({
-        "msgtype": "text",
-        "text":
+        "msgtype": "markdown",
+        "markdown":
             {
-                "content": "**********恢复通知**********\n告警类型: {0}\n告警级别: {1}\n故障时间: {2}\n\n恢复时间: {3}\n故障实例: {4}".format(types,levels,times[0],times[1],instances)
+                "content": "## <font color=\"info\">#恢复通知： {7}</font> \n**告警类型：** <font color=\"warning\">{0}</font>\n**告警级别：** {1}\n**告警时间：** {2}\n**恢复时间：** {3}\n**告警实例：** {4}\n**告警主题：** {5}\n**告警详情：**\n  <font color=\"comment\">{6}</font>".format(alertname,levels,times[0],times[1],instances,summary,description,status)
             }
         })
 
@@ -37,15 +39,12 @@ def recive(types,levels,times,instances):
 
 def webhook_url(params):
     headers = {"Content-type": "application/json"}
-    “”“
-    *****重要*****
-    ”“”
-    url = "使用你上面保存的webhook地址"
+    url = "xxx"
     r = requests.post(url,params,headers)
 
 def send_alert(json_re):
     for i in json_re['alerts']:
         if i['status'] == 'firing':
-            webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),i['labels']['instance']))
+            webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),i['labels']['instance'],i['annotations']['summary'],i['annotations']['description'],i['status']))
         elif i['status'] == 'resolved':
-            webhook_url(recive(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),i['labels']['instance']))
+            webhook_url(recive(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),i['labels']['instance'],i['annotations']['summary'],i['annotations']['description'],i['status']))
