@@ -37,9 +37,9 @@ def recive(types,levels,times,ins,instance):
 
 def webhook_url(params,url_key):
     headers = {"Content-type": "application/json"}
-    “”“
+    """
     *****重要*****
-    ”“”
+    """
     url = "{}".format(url_key)
     r = requests.post(url,params,headers)
 
