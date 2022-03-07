@@ -1,0 +1,242 @@
+Unknown option: -p
+usage: python3.6 [option] ... [-c cmd | -m mod | file | -] [arg] ...
+Try `python -h' for more information.
+Traceback (most recent call last):
+  File "app.py", line 5, in <module>
+    import Alert
+  File "/tmp/test/prometheus-flask/Alert.py", line 50
+    print(i,"sdasssssssssssssssssssssdddddddddddddddddddddddddddddd")
+        ^
+IndentationError: expected an indented block
+Traceback (most recent call last):
+  File "app.py", line 20, in <module>
+    parser = argparse.ArgumentParser()
+NameError: name 'argparse' is not defined
+Traceback (most recent call last):
+  File "app.py", line 20, in <module>
+    parser = argparse.ArgumentParser()
+NameError: name 'argparse' is not defined
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://10.10.138.72:5555/ (Press CTRL+C to quit)
+[2022-03-07 11:48:34,734] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:34] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:48:35,348] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:35] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:48:36,247] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:36] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:48:37,042] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:37] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:48:38,991] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:38] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:48:42,304] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:42] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:48:45,976] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:45] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:48:49,872] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:49] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'} sdasssssssssssssssssssssdddddddddddddddddddddddddddddd
+{'status': 'firing', 'labels': {'alertname': '磁盘容量小于 20%', 'app': 'node-server', 'device': '/dev/vda1', 'fstype': 'ext4', 'instance': '10.10.107.155:9100', 'job': 'nodes', 'mountpoint': '/', 'service': 'test'}, 'annotations': {'description': '10.10.107.155:9100磁盘 /dev/vda1 资源 已不足 5%, 当前值: 19.96301386667946', 'summary': '服务器实例 10.10.107.155:9100 磁盘不足 告警通知'}, 'startsAt': '2022-03-07T03:48:04.719Z', 'endsAt': '0001-01-01T00:00:00Z', 'generatorURL': 'http://zabbix:9090/graph?g0.expr=100+-+%28%28node_filesystem_avail_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D+%2A+100%29+%2F+node_filesystem_size_bytes%7Bfstype%3D~%22ext4%7Cxfs%7Cext2%7Cext3%22%2Cjob%21~%22iFans-nodes%22%2Cmountpoint%3D~%22.%2A%22%7D%29+%3E+1&g0.tab=1', 'fingerprint': '1a423dbf4ea15ab0'}[2022-03-07 11:48:59,764] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:48:59] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:49:12,950] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:49:12] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:49:26,238] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:49:26] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:49:43,198] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:49:43] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -
+[2022-03-07 11:50:06,369] ERROR in app: Exception on /alertinfo [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib64/python3.6/site-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 17, in alert_data
+    Alert.send_alert(json_re, args.key)
+  File "/tmp/test/prometheus-flask/Alert.py", line 53, in send_alert
+    webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+KeyError: 'severity'
+10.10.138.72 - - [07/Mar/2022 11:50:06] "[35m[1mPOST /alertinfo HTTP/1.1[0m" 500 -

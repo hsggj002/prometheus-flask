@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
-import requests
+from doctest import debug_script
+from pydoc import describe
 from flask import jsonify
+import requests
 import json
 import datetime
 
@@ -13,23 +15,23 @@ def parse_time(*args):
         times.append(eta)
     return times
 
-def alert(types,levels,times,ins,instance):
+def alert(status,alertnames,levels,times,ins,instance,description):
     params = json.dumps({
-        "msgtype": "text",
-        "text":
+        "msgtype": "markdown",
+        "markdown":
             {
-                "content": "**********告警通知**********\n告警类型: {0}\n告警级别: {1}\n故障时间: {2}\n{3}: {4}".format(types,levels,times[0],ins,instance)
+                "content": "## <font color=\"red\">告警通知: {0}</font>\n**告警名称:** <font color=\"warning\">{1}</font>\n**告警级别:** {2}\n**告警时间:** {3}\n{4}: {5}\n**告警详情:** <font color=\"comment\">{6}</font>".format(status,alertnames,levels,times[0],ins,instance,description)
             }
         })
 
     return params
 
-def recive(types,levels,times,ins,instance):
+def recive(status,alertnames,levels,times,ins,instance,description):
     params = json.dumps({
-        "msgtype": "text",
-        "text":
+        "msgtype": "markdown",
+        "markdown":
             {
-                "content": "**********恢复通知**********\n告警类型: {0}\n告警级别: {1}\n故障时间: {2}\n\n恢复时间: {3}\n{4}: {5}".format(types,levels,times[0],times[1],ins,instance)
+                "content": "## <font color=\"info\">恢复通知: {0}</font>\n**告警名称:** <font color=\"warning\">{1}</font>\n**告警级别:** {2}\n**告警时间:** {3}\n{4}: {5}\n**告警详情:** <font color=\"comment\">{6}</font>".format(status,alertnames,levels,times[0],times[1],ins,instance,description)
             }
         })
 
@@ -37,25 +39,26 @@ def recive(types,levels,times,ins,instance):
 
 def webhook_url(params,url_key):
     headers = {"Content-type": "application/json"}
-    “”“
+    """
     *****重要*****
-    ”“”
+    """
     url = "{}".format(url_key)
     r = requests.post(url,params,headers)
 
 def send_alert(json_re,url_key):
     for i in json_re['alerts']:
+        print(i,"sdasssssssssssssssssssssdddddddddddddddddddddddddddddd")
         if i['status'] == 'firing':
             if "instance" in i['labels']:
-                webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance']),url_key)
+                webhook_url(alert(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
             elif "namespace" in i['labels']:
-                webhook_url(alert(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'名称空间',i['labels']['namespace']),url_key)
+                webhook_url(alert(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
             elif "Watchdog" in i['labels']['alertname']:
-                webhook_url(alert(i['labels']['alertname'],'0','0','0','0'),url_key)
+                webhook_url(alert(i['status'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
         elif i['status'] == 'resolved':
             if "instance" in i['labels']:
-                webhook_url(recive(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'故障实例',i['labels']['instance']),url_key)
+                webhook_url(recive(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
             elif "namespace" in i['labels']:
-                webhook_url(recive(i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'名称空间',i['labels']['namespace']),url_key)
+                webhook_url(recive(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
             elif "Watchdog" in i['labels']['alertname']:
-                webhook_url(alert(i['labels']['alertname'],'0','0','0','0'),url_key)
+                webhook_url(alert(i['status'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
