@@ -47,7 +47,6 @@ def webhook_url(params,url_key):
 
 def send_alert(json_re,url_key):
     for i in json_re['alerts']:
-        print(i,"sdasssssssssssssssssssssdddddddddddddddddddddddddddddd")
         if i['status'] == 'firing':
             if "instance" in i['labels']:
                 webhook_url(alert(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
