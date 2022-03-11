@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask_json import as_json
 from flask import jsonify
+from gevent import pywsgi
 import sys
 import Alert
 import argparse
@@ -27,4 +28,7 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(0)
         
-    app.run(host="0.0.0.0", port=args.port)
+    #app.run(host="0.0.0.0", port=args.port)
+    
+    server = pywsgi.WSGIServer(('0.0.0.0', args.port), app)
+    server.serve_forever()
