@@ -3,8 +3,8 @@
 ## 描述：
 alertmanager告警信息发送到企业微信群，先发送到prometheus-flask程序，再由prometheus-flask对信息格式解析后再发送到企业微信群中。
 
-## 创建 systemd 文件
-[root@zabbix system]# cat prome-flask.service  
+## 创建 systemd 文件(ubuntu)
+[root@zabbix system]# cat /lib/systemd/system/prome-flask.service  
 [Unit]  
 Description=This is prometheus node exporter  
 After=docker.service  
@@ -16,6 +16,8 @@ KillMode=process
 Restart=on-failure  
 [Install]  
 WantedBy=multi-user.target  
+
+# centos systemd文件位置：/usr/lib/systemd/system
 
 ## 启动：
 systemctl start prome-flask.service
