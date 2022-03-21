@@ -10,7 +10,7 @@ Description=This is prometheus node exporter
 After=docker.service  
 [Service]  
 Type=simple  
-ExecStart=/usr/bin/python3.6 /data/prometheus-flask/main.py -p 5000 -k https://qyapi.weixin.qq.com/cgi-bin/XXXX {替换机器人key}  
+ExecStart=/usr/bin/python3.6 /data/prometheus-flask/app.py -p 5000 -k https://qyapi.weixin.qq.com/cgi-bin/XXXX {替换机器人key}  
 ExecReload=/bin/kill -HUP $MAINPID  
 KillMode=process  
 Restart=on-failure  
