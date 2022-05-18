@@ -41,4 +41,5 @@ CMD ["python", "/app/main.py"]
 flask_json == 0.3.4    
 flask == 2.0.1   
 requests == 2.19.1   
-
+pywsgi     
+uwsgi     
