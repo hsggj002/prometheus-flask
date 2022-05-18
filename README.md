@@ -28,7 +28,7 @@ systemctl enable prome-flask.service
 2、在app目录下指定依赖包，放在/app/rquirements.txt中。
 3、docker build .
 
-# cat Dockerfile
+### cat Dockerfile
 FROM python
 COPY ./app /app
 COPY ./requirements.txt /app/requirements.txt
@@ -36,7 +36,7 @@ WORKDIR /app
 RUN pip install -r /app/requirements.txt
 CMD ["python", "/app/main.py"]
 
-# cat requirements.txt
+### cat requirements.txt
 flask_json == 0.3.4
 flask == 2.0.1
 requests == 2.19.1
