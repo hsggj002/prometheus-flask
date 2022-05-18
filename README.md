@@ -23,10 +23,10 @@ WantedBy=multi-user.target
 systemctl start prome-flask.service
 systemctl enable prome-flask.service
 
-创建docker镜像：
-1、创建app目录，将代码文件拷贝到app下。
-2、在app目录下指定依赖包，放在/app/rquirements.txt中。
-3、docker build .
+创建docker镜像：      
+1、创建app目录，将代码文件拷贝到app下。     
+2、在app目录下指定依赖包，放在/app/rquirements.txt中。       
+3、docker build .       
 
 ### cat Dockerfile     
 FROM python      
