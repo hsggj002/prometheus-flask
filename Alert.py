@@ -15,23 +15,23 @@ def parse_time(*args):
         times.append(eta)
     return times
 
-def alert(status,alertnames,levels,times,ins,instance,description):
+def alert(status,region,alertnames,levels,times,ins,instance,description):
     params = json.dumps({
         "msgtype": "markdown",
         "markdown":
             {
-                "content": "## <font color=\"red\">告警通知: {0}</font>\n**告警名称:** <font color=\"warning\">{1}</font>\n**告警级别:** {2}\n**告警时间:** {3}\n{4}: {5}\n**告警详情:** <font color=\"comment\">{6}</font>".format(status,alertnames,levels,times[0],ins,instance,description)
+                "content": "## <font color=\"red\">告警通知: {0}</font>\n**告警机房:** <font color=\"warning\">{1}</font>\n**告警名称:** <font color=\"warning\">{2}</font>\n**告警级别:** {3}\n**告警时间:** {4}\n{5}: {6}\n**告警详情:** <font color=\"comment\">{7}</font>".format(status,region,alertnames,levels,times[0],ins,instance,description)
             }
         })
 
     return params
 
-def recive(status,alertnames,levels,times,ins,instance,description):
+def recive(status,region,alertnames,levels,times,ins,instance,description):
     params = json.dumps({
         "msgtype": "markdown",
         "markdown":
             {
-                "content": "## <font color=\"info\">恢复通知: {0}</font>\n**告警名称:** <font color=\"warning\">{1}</font>\n**告警级别:** {2}\n**告警时间:** {3}\n{4}: {5}\n**告警详情:** <font color=\"comment\">{6}</font>".format(status,alertnames,levels,times[0],times[1],ins,instance,description)
+                "content": "## <font color=\"info\">恢复通知: {0}</font>\n**告警机房:** <font color=\"warning\">{1}</font>\n**告警名称:** <font color=\"warning\">{2}</font>\n**告警级别:** {3}\n**告警时间:** {4}\n{5}: {6}\n**告警详情:** <font color=\"comment\">{7}</font>".format(status,region,alertnames,levels,times[0],times[1],ins,instance,description)
             }
         })
 
@@ -49,15 +49,15 @@ def send_alert(json_re,url_key):
     for i in json_re['alerts']:
         if i['status'] == 'firing':
             if "instance" in i['labels']:
-                webhook_url(alert(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
+                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
             elif "namespace" in i['labels']:
-                webhook_url(alert(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
+                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
             elif "Watchdog" in i['labels']['alertname']:
-                webhook_url(alert(i['status'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
+                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
         elif i['status'] == 'resolved':
             if "instance" in i['labels']:
-                webhook_url(recive(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
+                webhook_url(recive(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
             elif "namespace" in i['labels']:
-                webhook_url(recive(i['status'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
+                webhook_url(recive(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
             elif "Watchdog" in i['labels']['alertname']:
-                webhook_url(alert(i['status'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
+                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
