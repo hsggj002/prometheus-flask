@@ -30,12 +30,13 @@ systemctl enable prome-flask.service
 4、docker build .       
 
 ### cat Dockerfile     
-FROM python      
-COPY ./app /app    
-COPY ./requirements.txt /app/requirements.txt      
+FROM harbor.xxx.com/python/python:v1.0            
+RUN mkdir -p /app          
+COPY app /app           
+COPY requirements.txt /app/requirements.txt          
 WORKDIR /app     
-RUN pip install -r /app/requirements.txt      
-CMD ["python", "/app/main.py"]    
+RUN pip install -r /app/requirements.txt        
+CMD ["python", "main.py"]            
 
 ### cat requirements.txt    
 flask_json == 0.3.4    
