@@ -40,7 +40,7 @@ CMD ["python", "main.py"]
 
 ### OR
 ### cat Dockerfile     
-FROM python    
+FROM python:3.10.2    
 COPY ./app /app     
 COPY ./requirements.txt /app/requirements.txt     
 WORKDIR /app      
@@ -51,5 +51,4 @@ CMD ["python", "/app/main.py"]
 flask_json == 0.3.4    
 flask == 2.0.1   
 requests == 2.19.1   
-gevent == 20.5.1      
-uwsgi == 2.0.16     
+gevent == 20.5.1       # 如果是第二种dockerfile可以不加版本。
