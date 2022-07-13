@@ -36,7 +36,16 @@ COPY app /app
 COPY requirements.txt /app/requirements.txt          
 WORKDIR /app     
 RUN pip install -r /app/requirements.txt        
-CMD ["python", "main.py"]            
+CMD ["python", "main.py"]       
+
+### OR
+### cat Dockerfile     
+FROM python    
+COPY ./app /app     
+COPY ./requirements.txt /app/requirements.txt     
+WORKDIR /app      
+RUN pip install -r /app/requirements.txt    
+CMD ["python", "/app/main.py"]      
 
 ### cat requirements.txt    
 flask_json == 0.3.4    
