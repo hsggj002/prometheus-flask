@@ -10,7 +10,10 @@ def parse_time(*args):
     times = []
     for dates in args:
         eta_temp = dates
-        fd = datetime.datetime.strptime(eta_temp, "%Y-%m-%dT%H:%M:%S.%fZ")
+        if isinstance(eta_temp,float):
+            fd = datetime.datetime.strptime(eta_temp, "%Y-%m-%dT%H:%M:%S.%fZ")
+        else:
+            fd = datetime.datetime.strptime(eta_temp, "%Y-%m-%dT%H:%M:%SZ")
         eta = (fd + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S.%f")
         times.append(eta)
     return times
