@@ -12,7 +12,8 @@ def parse_time(*args):
         eta_temp = dates
         if len(eta_temp.split('.')) >= 2:
             if 'Z' in eta_temp.split('.')[1]:
-                fd = datetime.datetime.strptime(eta_temp, "%Y-%m-%dT%H:%M:%S.%fZ")
+                s_eta = eta_temp.split('.')[0] + '.' + eta_temp.split('.')[1][-5:]
+                fd = datetime.datetime.strptime(s_eta, "%Y-%m-%dT%H:%M:%S.%fZ")
             else:
                 eta_str = eta_temp.split('.')[1] = 'Z'
                 fd = datetime.datetime.strptime(eta_temp.split('.')[0] + eta_str, "%Y-%m-%dT%H:%M:%SZ")
