@@ -57,15 +57,25 @@ def send_alert(json_re,url_key):
     for i in json_re['alerts']:
         if i['status'] == 'firing':
             if "instance" in i['labels']:
-                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
+                if "description" in i['annotations']:
+                    webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
+                elif "message" in i['annotations']:
+                    webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['message']),url_key)
+                else:
+                    webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],'Service is wrong'),url_key)
             elif "namespace" in i['labels']:
-                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
+                webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
             elif "Watchdog" in i['labels']['alertname']:
-                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
+                webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],'0','0','0','0','0'),url_key)
         elif i['status'] == 'resolved':
             if "instance" in i['labels']:
-                webhook_url(recive(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
+                if "description" in i['annotations']:
+                    webhook_url(recive(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
+                elif "message" in i['annotations']:
+                    webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['message']),url_key)
+                else:
+                    webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],'Service is wrong'),url_key)
             elif "namespace" in i['labels']:
-                webhook_url(recive(i['status'],i['labels']['region'],i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
+                webhook_url(recive(i['status'],'bjD',i['labels']['alertname'],i['labels']['severity'],parse_time(i['startsAt'],i['endsAt']),'名称空间',i['labels']['namespace'],i['annotations']['description']),url_key)
             elif "Watchdog" in i['labels']['alertname']:
-                webhook_url(alert(i['status'],i['labels']['region'],i['labels']['alertname'],'0','0','0','0','0'),url_key)
+                webhook_url(alert(i['status'],'bjD',i['labels']['alertname'],'0','0','0','0','0'),url_key)
