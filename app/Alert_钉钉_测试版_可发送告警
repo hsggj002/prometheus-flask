@@ -1,0 +1,67 @@
+# -*- coding: UTF-8 -*-
+from doctest import debug_script
+from pydoc import describe
+from flask import jsonify
+import requests
+import json
+import datetime
+
+def parse_time(*args):
+    times = []
+    for dates in args:
+        eta_temp = dates
+        if len(eta_temp.split('.')) >= 2:
+            if 'Z' in eta_temp.split('.')[1]:
+                s_eta = eta_temp.split('.')[0] + '.' + eta_temp.split('.')[1][-5:]
+                fd = datetime.datetime.strptime(s_eta, "%Y-%m-%dT%H:%M:%S.%fZ")
+            else:
+                eta_str = eta_temp.split('.')[1] = 'Z'
+                fd = datetime.datetime.strptime(eta_temp.split('.')[0] + eta_str, "%Y-%m-%dT%H:%M:%SZ")
+        else:
+            fd = datetime.datetime.strptime(eta_temp, "%Y-%m-%dT%H:%M:%SZ")
+        eta = (fd + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S.%f")
+        times.append(eta)
+    return times
+
+def alert(alertnames,levels,times,ins,instance,description):
+    return {
+        "msgtype": "markdown",
+        "markdown": {
+            'title': "## <font color=\"red\">告警通知: firing</font>\n",
+            'text': "**告警名称:** <font color=\"warning\">{0}</font>\n**告警级别:** {1}\n**告警时间:** {2}\n{3}: {4}\n**告警详情:** <font color=\"comment\">{5}</font>".format(alertnames,levels,times,ins,instance,description),
+            },
+        }
+
+def recive(alertnames,levels,times,ins,instance,description):
+    return {
+        "msgtype": "markdown",
+        "markdown": {
+             'title': "## <font color=\"info\">恢复通知: resolved</font>\n",
+             'text': "**告警名称:** <font color=\"warning\">{0}</font>\n**告警级别:** {1}\n**告警时间:** {2}\n{3}: {4}\n**告警详情:** <font color=\"comment\">{5}</font>".format(alertnames,levels,times,ins,instance,description),
+            },
+        }
+
+def webhook_url(data,url_key):
+    headers = {"Content-type": "application/json"}
+    """
+    *****重要*****
+    """
+    r = requests.post(url_key, data=json.dumps(data), headers=headers)
+    #r = requests.post(url,data=params,headers=headers)
+    if r.status_code == 200:
+        print("DingTalk message sent successfully.",type(data))
+    else:
+        print("Failed to send DingTalk message. Status code:", r.status_code)
+        print("Response content:", r.text)
+    url = "{}".format(url_key)
+
+def send_alert(json_re,url_key):
+    for i in json_re['alerts']:
+        if i['status'] == 'firing':
+            if "instance" in i['labels']:
+                if "description" in i['annotations']:
+                    webhook_url(alert(i['labels']['alertname'],i['labels']['env'],parse_time(i['startsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
+        elif i['status'] == 'resolved':
+            if "instance" in i['labels']:
+                if "description" in i['annotations']:
+                    webhook_url(recive(i['labels']['alertname'],i['labels']['env'],parse_time(i['startsAt'],i['endsAt']),'故障实例',i['labels']['instance'],i['annotations']['description']),url_key)
